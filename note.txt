@@ -1,0 +1,4 @@
+create table
+    php artisan make:migration create_table_stockcount 
+    php artisan make:seeder StockCountSeeder
+    php artisan migrate:fresh --seed
