@@ -30,11 +30,11 @@ class ScanController extends Controller
     }
 
     public function store(Request $request) {
+
+
+
         $validator = Validator::make($request->all(), [
-            'item_code'   => 'required',
-            'sn' => 'required',
-            'sn2' => 'required',
-            'scan' => 'required',
+            'list'   => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -47,25 +47,27 @@ class ScanController extends Controller
 
         } else {
 
-            $post = StockCount::create([
-                'item_code'     => $request->input('item_code'),
-                'sn'   => $request->input('sn'),
-                'sn2'     => $request->input('sn2'),
-                'scan'   => $request->input('scan'),
-            ]);
+            Log::info('List Of Scan: '.$request->input('list'));
 
-            if ($post) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Post Berhasil Disimpan!',
-                    'data' => $post
-                ], 201);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Post Gagal Disimpan!',
-                ], 400);
-            }
+            // $post = StockCount::create([
+            //     'item_code'     => $request->input('item_code'),
+            //     'sn'   => $request->input('sn'),
+            //     'sn2'     => $request->input('sn2'),
+            //     'scan'   => $request->input('scan'),
+            // ]);
+
+            // if ($post) {
+            //     return response()->json([
+            //         'success' => true,
+            //         'message' => 'Post Berhasil Disimpan!',
+            //         'data' => $post
+            //     ], 201);
+            // } else {
+            //     return response()->json([
+            //         'success' => false,
+            //         'message' => 'Post Gagal Disimpan!',
+            //     ], 400);
+            // }
 
         }
     }

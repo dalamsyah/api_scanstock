@@ -18,4 +18,5 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/scan', 'ScanController@index');
+$router->post('/scan', 'ScanController@store');
 $router->put('/scan/{id}', 'ScanController@update');
