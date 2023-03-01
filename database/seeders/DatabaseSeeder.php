@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'sn' => Str::random(10),
             'sn2' => Str::random(10),
             'scan' => 0,
+            'upload' => 0,
         ]);
     }
 }

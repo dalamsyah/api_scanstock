@@ -19,6 +19,7 @@ class CreateTableStockcount extends Migration
             $table->string('sn', 30);
             $table->string('sn2', 30);
             $table->integer('scan');
+            $table->boolean('upload', 0);
             $table->timestamps();
         });
     }

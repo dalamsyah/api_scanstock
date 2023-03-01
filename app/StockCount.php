@@ -15,6 +15,6 @@ class StockCount extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'sn', 'sn2', 'scan'
+        'title', 'sn', 'sn2', 'scan', 'upload'
     ];
 }

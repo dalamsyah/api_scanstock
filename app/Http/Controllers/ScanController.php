@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\StockCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -41,13 +42,40 @@ class ScanController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Semua Kolom Wajib Diisi!',
+                'message' => 'required!',
                 'data'   => $validator->errors()
             ], 401);
 
         } else {
 
+            $list = json_decode($request->input('list'));
+            Log::info('Count List Of Scan: '.count($list));
             Log::info('List Of Scan: '.$request->input('list'));
+
+            $updateCount = 0;
+            foreach ($list as $p) {
+                $update = StockCount::where('idstokcount', $p->idstokcount)->update([
+                    'scan'   => $p->scan,
+                    'updated_at'   => $p->updated_at,
+                ]);
+
+                $updateCount += $update;
+            }
+
+            if ($updateCount == count($list)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Upload Success!',
+                    'data' => []
+                ], 201);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Try again!',
+                    'data' => []
+                ], 200);
+            }
+            
 
             // $post = StockCount::create([
             //     'item_code'     => $request->input('item_code'),
